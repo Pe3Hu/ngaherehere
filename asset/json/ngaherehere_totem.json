@@ -1,0 +1,65 @@
+[
+ {
+  "title": "bird",
+  "head count": 1,
+  "torso count": 1,
+  "limb count": 2,
+  "head weight": 3,
+  "torso weight": 5,
+  "limb weight": 8
+ },
+ {
+  "title": "fish",
+  "head count": 1,
+  "torso count": 1,
+  "limb count": 3,
+  "head weight": 6,
+  "torso weight": 6,
+  "limb weight": 4
+ },
+ {
+  "title": "animal",
+  "head count": 1,
+  "torso count": 1,
+  "limb count": 4,
+  "head weight": 5,
+  "torso weight": 7,
+  "limb weight": 3
+ },
+ {
+  "title": "hydra",
+  "head count": 3,
+  "torso count": 1,
+  "limb count": 3,
+  "head weight": 4,
+  "torso weight": 3,
+  "limb weight": 3
+ },
+ {
+  "title": "ball",
+  "head count": 0,
+  "torso count": 8,
+  "limb count": 0,
+  "head weight": 0,
+  "torso weight": 3,
+  "limb weight": 0
+ },
+ {
+  "title": "spider",
+  "head count": 0,
+  "torso count": 1,
+  "limb count": 8,
+  "head weight": 0,
+  "torso weight": 8,
+  "limb weight": 2
+ },
+ {
+  "title": "snake",
+  "head count": 1,
+  "torso count": 9,
+  "limb count": 0,
+  "head weight": 6,
+  "torso weight": 2,
+  "limb weight": 0
+ }
+]

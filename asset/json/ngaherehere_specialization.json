@@ -1,0 +1,23 @@
+[
+ {
+  "title": "head",
+  "lethality": 6,
+  "durability": 5,
+  "sensory": 7,
+  "mobility": 2
+ },
+ {
+  "title": "torso",
+  "lethality": 2,
+  "durability": 9,
+  "sensory": 5,
+  "mobility": 4
+ },
+ {
+  "title": "limb",
+  "lethality": 7,
+  "durability": 1,
+  "sensory": 3,
+  "mobility": 9
+ }
+]
