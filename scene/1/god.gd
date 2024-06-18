@@ -5,6 +5,7 @@ extends MarginContainer
 @onready var index = $VBox/Index
 @onready var framework = $VBox/Framework
 @onready var core = $VBox/Core
+@onready var library = $VBox/Library
 
 var pantheon = null
 var planet = null
@@ -31,4 +32,5 @@ func init_basic_setting() -> void:
 	input.god = self
 	core.set_attributes(input)
 	framework.set_attributes(input)
+	library.set_attributes(input)
 #endregion

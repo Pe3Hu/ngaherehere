@@ -24,6 +24,10 @@ func _ready() -> void:
 func init_arr() -> void:
 	arr.gear = ["head", "limb", "torso"]
 	arr.specialization = ["lethality", "durability", "sensory", "mobility"]
+	arr.auxiliary = ["sensory", "mobility"]
+	arr.impact = ["minimum", "maximum"]
+	arr.summand = ["amplifier", "spread"]
+	arr.role = ["offense", "defense"]
 
 
 func init_num() -> void:
@@ -36,6 +40,10 @@ func init_num() -> void:
 	num.module = {}
 	num.module.a = 36
 	num.module.r = num.module.a / sqrt(2)
+	
+	num.amplifier = {}
+	num.amplifier.n = 5
+	num.amplifier.share = 0.5
 
 
 func init_dict() -> void:
@@ -44,6 +52,7 @@ func init_dict() -> void:
 	
 	init_totem()
 	init_specialization()
+	init_software()
 
 
 func init_neighbor() -> void:
@@ -68,7 +77,7 @@ func init_neighbor() -> void:
 	]
 
 
-func init_font():
+func init_font() -> void:
 	dict.font = {}
 	dict.font.size = {}
 	dict.font.size["basic"] = 18
@@ -118,6 +127,29 @@ func init_specialization() -> void:
 		dict.specialization.title[specialization.title] = data
 
 
+func init_software() -> void:
+	dict.software = {}
+	dict.software.rank = {}
+	var exceptions = ["rank"]
+	
+	var path = "res://asset/json/ngaherehere_software.json"
+	var array = load_data(path)
+	
+	for software in array:
+		software.rank = int(software.rank)
+		var data = {}
+		
+		for key in software:
+			if !exceptions.has(key):
+				data[key] = software[key]
+	
+		dict.software.rank[software.rank] = data
+	
+	dict.role = {}
+	dict.role["offense"] = "lethality"
+	dict.role["defense"] = "durability"
+
+
 func init_scene() -> void:
 	scene.pantheon = load("res://scene/1/pantheon.tscn")
 	scene.god = load("res://scene/1/god.tscn")
@@ -125,6 +157,8 @@ func init_scene() -> void:
 	scene.planet = load("res://scene/2/planet.tscn")
 	
 	scene.module = load("res://scene/3/module.tscn")
+	
+	scene.software = load("res://scene/4/software.tscn")
 
 
 func init_vec():
@@ -133,7 +167,9 @@ func init_vec():
 	
 	vec.size.token = Vector2(vec.size.sixteen * 2)
 	vec.size.module = Vector2.ONE * num.module.a
-	vec.size.specialization = vec.size.module * 1.25
+	vec.size.specialization = vec.size.module# * 1.25
+	vec.size.software = Vector2(vec.size.specialization)
+	
 	
 	init_window_size()
 
@@ -158,6 +194,18 @@ func init_color():
 	color.specialization.sensory = Color.from_hsv(60 / h, 0.6, 0.7)
 	color.specialization.mobility = Color.from_hsv(120 / h, 0.6, 0.7)
 	color.specialization.durability = Color.from_hsv(210 / h, 0.6, 0.7)
+	
+	color.impact = {}
+	color.impact.offense = {}
+	color.impact.offense.maximum = Color.from_hsv(0 / h, 0.7, 1.0)
+	color.impact.offense.minimum = Color.from_hsv(0 / h, 0.7, 0.6)
+	color.impact.defense = {}
+	color.impact.defense.maximum = Color.from_hsv(210 / h, 0.7, 1.0)
+	color.impact.defense.minimum = Color.from_hsv(210 / h, 0.7, 0.6)
+	
+	color.summand = {}
+	color.summand.spread = Color.from_hsv(180 / h, 0.55, 0.6)
+	color.summand.amplifier = Color.from_hsv(330 / h, 0.55, 0.6)
 
 
 func save(path_: String, data_: String):

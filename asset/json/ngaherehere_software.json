@@ -1,0 +1,50 @@
+[
+ {
+  "rank": 0,
+  "base": 20,
+  "primary": 10,
+  "secondary": 10,
+  "spread": 10,
+  "amplifier": 20
+ },
+ {
+  "rank": 1,
+  "base": 30,
+  "primary": 20,
+  "secondary": 10,
+  "spread": 14,
+  "amplifier": 50
+ },
+ {
+  "rank": 2,
+  "base": 50,
+  "primary": 35,
+  "secondary": 15,
+  "spread": 24,
+  "amplifier": 70
+ },
+ {
+  "rank": 3,
+  "base": 80,
+  "primary": 55,
+  "secondary": 25,
+  "spread": 38,
+  "amplifier": 110
+ },
+ {
+  "rank": 4,
+  "base": 130,
+  "primary": 85,
+  "secondary": 45,
+  "spread": 60,
+  "amplifier": 200
+ },
+ {
+  "rank": 5,
+  "base": 210,
+  "primary": 140,
+  "secondary": 70,
+  "spread": 100,
+  "amplifier": 300
+ }
+]
