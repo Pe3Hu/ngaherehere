@@ -32,18 +32,12 @@ func init_basic_setting(input_: Dictionary) -> void:
 	else:
 		custom_minimum_size = Vector2(Global.vec.size.token)
 	
-	var input = {}
-	input.type = type
-	input.subtype = subtype
-	designation.set_attributes(input)
-	
-	input.type = "number"
-	input.subtype = 0
+	init_tokens()
 	
 	if input_.has("value"):
-		input.subtype = input_.value
+		value.set_number(input_.value)
+		value.visible = true
 	
-	value.set_attributes(input)
 	value.custom_minimum_size = Vector2(Global.vec.size.token)
 	
 	var font_size = Global.dict.font.size.basic
@@ -55,6 +49,19 @@ func init_basic_setting(input_: Dictionary) -> void:
 	
 	if !input_.has("value"):
 		value.visible = false
+
+
+func init_tokens() -> void:
+	var input = {}
+	input.type = type
+	input.subtype = subtype
+	designation.set_attributes(input)
+	
+	input.type = "number"
+	input.subtype = 0
+	
+	value.set_attributes(input)
+	value.visible = false
 
 
 func init_bg() -> void:
@@ -112,13 +119,17 @@ func set_type_and_subtype(type_: String, subtype_: String) -> void:
 
 
 func replicate(token_: MarginContainer) -> void:
-	type = token_.type
-	designation.type = type
-	subtype = token_.subtype
-	designation.subtype = subtype
-	designation.update_image()
+	set_type_and_subtype(token_.designation.type, token_.designation.subtype)
+	init_tokens()
+	
+	if token_.bg.visible:
+		init_bg()
+		var style = token_.bg.get("theme_override_styles/panel")
+		set_bg_color(style.bg_color)
 	
 	if token_.value.visible:
 		set_value(token_.get_value())
+		value.visible = true
 	
 	visible = token_.visible
+	custom_minimum_size = token_.custom_minimum_size

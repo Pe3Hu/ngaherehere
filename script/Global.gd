@@ -28,6 +28,7 @@ func init_arr() -> void:
 	arr.impact = ["minimum", "maximum"]
 	arr.summand = ["amplifier", "spread"]
 	arr.role = ["offense", "defense"]
+	arr.target = ["first", "second", "third"]
 
 
 func init_num() -> void:
@@ -44,6 +45,11 @@ func init_num() -> void:
 	num.amplifier = {}
 	num.amplifier.n = 5
 	num.amplifier.share = 0.5
+	
+	num.target = {}
+	num.target.n = 3
+	num.target.min = 0.2
+	num.target.max = 1 - num.target.min * (num.target.n - 1)
 
 
 func init_dict() -> void:
@@ -169,6 +175,10 @@ func init_vec():
 	vec.size.module = Vector2.ONE * num.module.a
 	vec.size.specialization = vec.size.module# * 1.25
 	vec.size.software = Vector2(vec.size.specialization)
+	vec.size.clash = Vector2(vec.size.module)
+	vec.size.target = Vector2(vec.size.module)
+	
+	vec.size.bar = Vector2(num.module.a / 2, num.module.a * num.framework.n)
 	
 	
 	init_window_size()
@@ -206,6 +216,11 @@ func init_color():
 	color.summand = {}
 	color.summand.spread = Color.from_hsv(180 / h, 0.55, 0.6)
 	color.summand.amplifier = Color.from_hsv(330 / h, 0.55, 0.6)
+	
+	color.indicator = {}
+	color.indicator.energy = {}
+	color.indicator.energy.fill = Color.from_hsv(30 / h, 0.9, 0.7)
+	color.indicator.energy.background = Color.from_hsv(30 / h, 0.5, 0.9)
 
 
 func save(path_: String, data_: String):

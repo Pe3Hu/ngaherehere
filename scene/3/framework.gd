@@ -2,10 +2,12 @@ extends MarginContainer
 
 
 #region var
-@onready var modules = $Modules
+@onready var modules = $HBox/Modules
+@onready var energy = $HBox/Energy
 
 var god = null
 var core = null
+var nexus = null
 var totem = null
 var grids = {}
 #endregion
@@ -24,6 +26,7 @@ func init_basic_setting() -> void:
 	core.framework = self
 	
 	init_modules()
+	init_indicator()
 
 
 func init_modules() -> void:
@@ -54,11 +57,14 @@ func add_module(grid_: Vector2i) -> void:
 			input.orientation = "axis"
 			
 			if grid_.x == grid_.y:
-				input.orientation = "core"
+				input.orientation = "nexus"
 	
 	var module = Global.scene.module.instantiate()
 	modules.add_child(module)
 	module.set_attributes(input)
+	
+	if input.orientation == "nexus":
+		nexus = module
 
 
 func update_module_neighbors() -> void:
@@ -116,5 +122,13 @@ func update_module_types() -> void:
 		
 		if options[orientation].is_empty():
 			options.erase(orientation)
+
+
+func  init_indicator() -> void:
+	var input = {}
+	input.framework = self
+	input.type = "energy"
+	input.max = 100
+	energy.set_attributes(input)
 #endregion
 

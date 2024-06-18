@@ -9,6 +9,7 @@ extends MarginContainer
 
 var pantheon = null
 var planet = null
+var tactician = null
 #endregion
 
 
@@ -33,4 +34,6 @@ func init_basic_setting() -> void:
 	core.set_attributes(input)
 	framework.set_attributes(input)
 	library.set_attributes(input)
+	
+	tactician = Classes.Tactician.new(input)
 #endregion

@@ -24,18 +24,8 @@ func set_attributes(input_: Dictionary) -> void:
 
 func init_basic_setting() -> void:
 	proprietor.grids[grid] = self
-	
-	init_bg()
-	
 	#if orientation == "core":
 	#	type.visible = false
-
-
-
-func init_bg() -> void:
-	var style = StyleBoxFlat.new()
-	style.bg_color = Color.SLATE_GRAY
-	bg.set("theme_override_styles/panel", style)
 
 
 func set_type(type_: String) -> void:
@@ -47,8 +37,8 @@ func set_type(type_: String) -> void:
 	gear.set_attributes(input)
 	gear.custom_minimum_size = Global.vec.size.module
 	
-	var style = bg.get("theme_override_styles/panel")
-	style.bg_color = Global.color.module[type_]
+	gear.init_bg()
+	gear.set_bg_color(Global.color.module[type_])
 	
 	for specialization in Global.arr.specialization:
 		var weight = Global.dict.specialization.title[type_][specialization]
@@ -88,3 +78,7 @@ func clean() -> void:
 	get_parent().remove_child(self)
 	queue_free()
 #endregion
+
+
+func get_damage() -> void:
+	gear.change_value(-1)
