@@ -3,9 +3,9 @@ extends MarginContainer
 
 #region var
 @onready var targets = $Targets
-@onready var first = $Targets/First
-@onready var second = $Targets/Second
-@onready var third = $Targets/Third
+@onready var axis = $Targets/Axis
+@onready var center = $Targets/Center
+@onready var edge = $Targets/Edge
 
 var clash = null
 #endregion
@@ -23,19 +23,19 @@ func init_basic_setting() -> void:
 
 
 func init_targets() -> void:
-	var options = []
-	var framework = clash.roles.defense.framework
-	options.append_array(framework.modules.get_children())
+	var directive = clash.roles["offense"].dispenser.actives.get_child(0)
+	var _axis = clash.roles["offense"].tactician.axis
 	
-	options.erase(framework.nexus)
-	
-	for type in Global.arr.target:
-		var input = {}
-		input.aim = self
-		input.module = options.pick_random()
-		options.erase(input.module)
-		var target = get(type)
-		target.set_attributes(input)
+	for _grids in directive.grids:
+		if _grids.has(_axis):
+			for grid in _grids:
+				var index = _grids.find(grid)
+				var input = {}
+				input.aim = self
+				input.type = Global.arr.target[index]
+				input.module = clash.roles["defense"].framework.grids[grid]
+				var target = get(input.type)
+				target.set_attributes(input)
 #end region
 
 

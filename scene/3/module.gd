@@ -33,7 +33,7 @@ func set_type(type_: String) -> void:
 	input.proprietor = self
 	input.type = "gear"
 	input.subtype = type_
-	input.value = 1
+	input.value = grid.y * 5  + grid.x
 	gear.set_attributes(input)
 	gear.custom_minimum_size = Global.vec.size.module
 	

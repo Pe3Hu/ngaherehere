@@ -30,18 +30,25 @@ func set_role(god_: MarginContainer, role_: String) -> void:
 	roles[role_] = god_
 	var token = get(role_)
 	token.replicate(god_.index)
-	#var input = {}
-	#input.proprietor = self
-	#input.type = "clash"
-	#input.subtype = role_
-	#token.set_attributes(input)
-	#token.custom_minimum_size = Global.vec.size.clash
+	god_.tactician.set_clash(self)
 	
 	if gods.keys().size() == 2:
-		aim.init_targets()
+		roles["offense"].opponent = roles["defense"]
+		roles["defense"].opponent = roles["offense"]
+		
+		select_directives()
 		roll_impacts()
 		spread_impacts()
 		aim.penetration_test()
+
+
+func select_directives() -> void:
+	for god in gods:
+		var role = gods[god]
+		god.tactician.select_directive()
+		
+		if role == "offense":
+			aim.init_targets()
 
 
 func roll_impacts() -> void:
@@ -52,6 +59,6 @@ func roll_impacts() -> void:
 
 func spread_impacts() -> void:
 	for god in gods:
-		god.tactician.set_clash(self)
+		god.tactician.spread_impacts()
 #end region
 

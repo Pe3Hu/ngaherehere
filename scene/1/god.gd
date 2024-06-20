@@ -6,10 +6,12 @@ extends MarginContainer
 @onready var framework = $VBox/Framework
 @onready var core = $VBox/Core
 @onready var library = $VBox/Library
+@onready var dispenser = $VBox/Dispenser
 
 var pantheon = null
 var planet = null
 var tactician = null
+var opponent = null
 #endregion
 
 
@@ -34,6 +36,7 @@ func init_basic_setting() -> void:
 	core.set_attributes(input)
 	framework.set_attributes(input)
 	library.set_attributes(input)
+	dispenser.set_attributes(input)
 	
 	tactician = Classes.Tactician.new(input)
 #endregion

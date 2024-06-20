@@ -32,11 +32,11 @@ layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="First" parent="Targets" instance=ExtResource("2_7mqxx")]
+[node name="Axis" parent="Targets" instance=ExtResource("2_7mqxx")]
 layout_mode = 2
 
-[node name="Second" parent="Targets" instance=ExtResource("2_7mqxx")]
+[node name="Center" parent="Targets" instance=ExtResource("2_7mqxx")]
 layout_mode = 2
 
-[node name="Third" parent="Targets" instance=ExtResource("2_7mqxx")]
+[node name="Edge" parent="Targets" instance=ExtResource("2_7mqxx")]
 layout_mode = 2

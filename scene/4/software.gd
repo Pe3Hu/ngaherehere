@@ -2,14 +2,14 @@ extends MarginContainer
 
 
 #region var
-@onready var maximum = $Softwares/Impacts/Maximum
-@onready var minimum = $Softwares/Impacts/Minimum
-@onready var lethality = $Softwares/Multipliers/Lethality
-@onready var durability = $Softwares/Multipliers/Durability
-@onready var sensory = $Softwares/Multipliers/Sensory
-@onready var mobility = $Softwares/Multipliers/Mobility
-@onready var spread = $Softwares/Summands/Spread
-@onready var amplifier = $Softwares/Summands/Amplifier
+@onready var maximum = $HBox/Impacts/Maximum
+@onready var minimum = $HBox/Impacts/Minimum
+@onready var lethality = $HBox/Multipliers/Lethality
+@onready var durability = $HBox/Multipliers/Durability
+@onready var sensory = $HBox/Multipliers/Sensory
+@onready var mobility = $HBox/Multipliers/Mobility
+@onready var spread = $HBox/Summands/Spread
+@onready var amplifier = $HBox/Summands/Amplifier
 
 var library = null
 var rank = null
@@ -21,12 +21,12 @@ var role = null
 func set_attributes(input_: Dictionary) -> void:
 	library = input_.library
 	rank = input_.rank
+	role = input_.role
 	
 	init_basic_setting()
 
 
 func init_basic_setting() -> void:
-	role = "offense"
 	init_tokens()
 	roll_values()
 

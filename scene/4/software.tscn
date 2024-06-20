@@ -27,49 +27,49 @@ visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7paps")
 
-[node name="Softwares" type="HBoxContainer" parent="."]
+[node name="HBox" type="HBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Impacts" type="VBoxContainer" parent="Softwares"]
+[node name="Impacts" type="VBoxContainer" parent="HBox"]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Maximum" parent="Softwares/Impacts" instance=ExtResource("2_r2aif")]
+[node name="Maximum" parent="HBox/Impacts" instance=ExtResource("2_r2aif")]
 layout_mode = 2
 
-[node name="Minimum" parent="Softwares/Impacts" instance=ExtResource("2_r2aif")]
+[node name="Minimum" parent="HBox/Impacts" instance=ExtResource("2_r2aif")]
 layout_mode = 2
 
-[node name="Multipliers" type="GridContainer" parent="Softwares"]
+[node name="Multipliers" type="GridContainer" parent="HBox"]
 visible = false
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 2
 
-[node name="Lethality" parent="Softwares/Multipliers" instance=ExtResource("2_r2aif")]
+[node name="Lethality" parent="HBox/Multipliers" instance=ExtResource("2_r2aif")]
 layout_mode = 2
 
-[node name="Sensory" parent="Softwares/Multipliers" instance=ExtResource("2_r2aif")]
+[node name="Sensory" parent="HBox/Multipliers" instance=ExtResource("2_r2aif")]
 layout_mode = 2
 
-[node name="Durability" parent="Softwares/Multipliers" instance=ExtResource("2_r2aif")]
+[node name="Durability" parent="HBox/Multipliers" instance=ExtResource("2_r2aif")]
 layout_mode = 2
 
-[node name="Mobility" parent="Softwares/Multipliers" instance=ExtResource("2_r2aif")]
+[node name="Mobility" parent="HBox/Multipliers" instance=ExtResource("2_r2aif")]
 layout_mode = 2
 
-[node name="Summands" type="VBoxContainer" parent="Softwares"]
+[node name="Summands" type="VBoxContainer" parent="HBox"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Spread" parent="Softwares/Summands" instance=ExtResource("2_r2aif")]
+[node name="Spread" parent="HBox/Summands" instance=ExtResource("2_r2aif")]
 layout_mode = 2
 
-[node name="Amplifier" parent="Softwares/Summands" instance=ExtResource("2_r2aif")]
+[node name="Amplifier" parent="HBox/Summands" instance=ExtResource("2_r2aif")]
 layout_mode = 2

@@ -28,7 +28,10 @@ func init_arr() -> void:
 	arr.impact = ["minimum", "maximum"]
 	arr.summand = ["amplifier", "spread"]
 	arr.role = ["offense", "defense"]
-	arr.target = ["first", "second", "third"]
+	arr.target = ["axis", "center", "edge"]
+	arr.axis = ["first", "second", "third", "fourth"]
+	arr.center = ["clockwise", "counter clockwise"]
+	arr.edge = ["clockwise", "counter clockwise"]
 
 
 func init_num() -> void:
@@ -36,7 +39,8 @@ func init_num() -> void:
 	num.index.god = 0
 	
 	num.framework = {}
-	num.framework.n = 5
+	num.framework.k = 2
+	num.framework.n = num.framework.k * 2 + 1
 	
 	num.module = {}
 	num.module.a = 36
@@ -50,6 +54,13 @@ func init_num() -> void:
 	num.target.n = 3
 	num.target.min = 0.2
 	num.target.max = 1 - num.target.min * (num.target.n - 1)
+	
+	num.distribution = {}
+	num.distribution.min = 25
+	num.distribution.max = 75
+	
+	num.doublet = {}
+	num.doublet.n = 2
 
 
 func init_dict() -> void:
@@ -165,6 +176,7 @@ func init_scene() -> void:
 	scene.module = load("res://scene/3/module.tscn")
 	
 	scene.software = load("res://scene/4/software.tscn")
+	scene.directive = load("res://scene/4/directive.tscn")
 
 
 func init_vec():
@@ -175,6 +187,7 @@ func init_vec():
 	vec.size.module = Vector2.ONE * num.module.a
 	vec.size.specialization = vec.size.module# * 1.25
 	vec.size.software = Vector2(vec.size.specialization)
+	vec.size.directive = Vector2(vec.size.specialization)# * 1.25
 	vec.size.clash = Vector2(vec.size.module)
 	vec.size.target = Vector2(vec.size.module)
 	
@@ -260,3 +273,54 @@ func get_random_key(dict_: Dictionary):
 	
 	print("!bug! index_r error in get_random_key func")
 	return null
+
+
+func get_all_constituents(array_: Array) -> Dictionary:
+	var constituents = {}
+	constituents[0] = []
+	constituents[1] = []
+	
+	for child in array_:
+		constituents[0].append(child)
+		constituents[1].append([child])
+	
+	for _i in array_.size()-2:
+		set_constituents_based_on_size(constituents, _i+2)
+	
+	constituents[array_.size()] = [constituents[0]]
+	constituents.erase(0)
+	return constituents
+
+
+func set_constituents_based_on_size(constituents_: Dictionary, size_: int) -> void:
+	var parents = constituents_[size_-1]
+	constituents_[size_] = []
+	
+	for parent in parents:
+		for child in constituents_[0]:
+			if !parent.has(child):
+				var constituent = []
+				constituent.append_array(parent)
+				constituent.append(child)
+				constituent.sort_custom(func(a, b): return constituents_[0].find(a) < constituents_[0].find(b))
+				
+				if !constituents_[size_].has(constituent):
+					constituents_[size_].append(constituent)
+
+
+func get_all_constituents_based_on_size(array_: Array, size_: int) -> Array:
+	var constituents = {}
+	constituents[0] = []
+	constituents[1] = []
+	
+	for child in array_:
+		constituents[0].append(child)
+		constituents[1].append([child])
+	
+	for _i in array_.size()-2:
+		set_constituents_based_on_size(constituents, _i+2)
+		
+		if constituents.keys().size() == size_ + 1:
+			return constituents[size_]
+	
+	return constituents[constituents.keys().size() - 1]

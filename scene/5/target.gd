@@ -7,6 +7,7 @@ extends MarginContainer
 @onready var gear = $VBox/Gear
 
 var aim = null
+var type = null
 var module = null
 #endregion
 
@@ -14,6 +15,7 @@ var module = null
 #region init
 func set_attributes(input_: Dictionary) -> void:
 	aim = input_.aim
+	type = input_.type
 	module = input_.module
 	
 	init_basic_setting()

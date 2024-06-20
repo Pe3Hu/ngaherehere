@@ -10,6 +10,8 @@ var core = null
 var nexus = null
 var totem = null
 var grids = {}
+var axes = {}
+var doublets = {}
 #endregion
 
 
@@ -40,6 +42,7 @@ func init_modules() -> void:
 	
 	update_module_neighbors()
 	update_module_types()
+	init_axes()
 
 
 func add_module(grid_: Vector2i) -> void:
@@ -122,6 +125,19 @@ func update_module_types() -> void:
 		
 		if options[orientation].is_empty():
 			options.erase(orientation)
+
+
+func init_axes() -> void:
+	for type in Global.arr.axis:
+		axes[type] = []
+		var index = Global.arr.axis.find(type)
+		
+		var directon = Global.dict.neighbor.linear[index]
+		var module = nexus
+		
+		for _i in Global.num.framework.k:
+			module = module.directions[directon]
+			axes[type].append(module)
 
 
 func  init_indicator() -> void:
