@@ -20,10 +20,10 @@ func set_attributes(input_: Dictionary) -> void:
 
 
 func init_basic_setting() -> void:
-	init_chapters()
+	init_tokens()
 
 
-func init_chapters() -> void:
+func init_tokens() -> void:
 	for specialization in Global.arr.specialization:
 		var token = get(specialization)
 		var input = {}
@@ -33,7 +33,6 @@ func init_chapters() -> void:
 		input.value = 0
 		token.set_attributes(input)
 		token.custom_minimum_size = Global.vec.size.specialization
-		
 		token.set_bg_color(Global.color.specialization[specialization])
 
 

@@ -31,6 +31,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_2c7gi")
 layout_mode = 2
 theme_override_constants/separation = 0
 
+[node name="Circuits" type="HBoxContainer" parent="HBox"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
 [node name="Modules" type="GridContainer" parent="HBox"]
 layout_mode = 2
 theme_override_constants/h_separation = 0

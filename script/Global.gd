@@ -32,6 +32,7 @@ func init_arr() -> void:
 	arr.axis = ["first", "second", "third", "fourth"]
 	arr.center = ["clockwise", "counter clockwise"]
 	arr.edge = ["clockwise", "counter clockwise"]
+	arr.circuit = ["isolation", "consumption"]
 
 
 func init_num() -> void:
@@ -61,15 +62,19 @@ func init_num() -> void:
 	
 	num.doublet = {}
 	num.doublet.n = 2
+	
+	num.chip = {}
+	num.chip.min = 1
+	num.chip.max = 5
 
 
 func init_dict() -> void:
 	init_neighbor()
 	init_font()
 	
-	init_totem()
 	init_specialization()
 	init_software()
+	init_framework()
 
 
 func init_neighbor() -> void:
@@ -101,29 +106,6 @@ func init_font() -> void:
 	dict.font.size["season"] = 18
 	dict.font.size["phase"] = 18
 	dict.font.size["moon"] = 18
-
-
-func init_totem() -> void:
-	dict.totem = {}
-	dict.totem.title = {}
-	var exceptions = ["title"]
-	
-	var path = "res://asset/json/ngaherehere_totem.json"
-	var array = load_data(path)
-	
-	for totem in array:
-		var data = {}
-		
-		for key in totem:
-			if !exceptions.has(key):
-				var words = key.split(" ")
-				
-				if !data.has(words[0]):
-					data[words[0]] = {}
-				
-				data[words[0]][words[1]] = totem[key]
-	
-		dict.totem.title[totem.title] = data
 
 
 func init_specialization() -> void:
@@ -167,6 +149,38 @@ func init_software() -> void:
 	dict.role["defense"] = "durability"
 
 
+func init_framework() -> void:
+	dict.framework = {}
+	dict.framework.title = {}
+	var exceptions = ["title"]
+	exceptions.append_array(arr.gear)
+	
+	var path = "res://asset/json/ngaherehere_framework.json"
+	var array = load_data(path)
+	
+	for framework in array:
+		var data = {}
+		data.gears = {}
+		data.circuits = {}
+		
+		for key in framework:
+			if !exceptions.has(key):
+				var index = int(framework[key])
+				
+				if !data.circuits.has(index):
+					data.circuits[index] = []
+				
+				data.circuits[index].append(int(key))
+			else:
+				if arr.gear.has(key):
+					var circuits = framework[key].split(",")
+					
+					for circuit in circuits:
+						data.gears[int(circuit)] = key
+	
+		dict.framework.title[framework.title] = data
+
+
 func init_scene() -> void:
 	scene.pantheon = load("res://scene/1/pantheon.tscn")
 	scene.god = load("res://scene/1/god.tscn")
@@ -177,6 +191,9 @@ func init_scene() -> void:
 	
 	scene.software = load("res://scene/4/software.tscn")
 	scene.directive = load("res://scene/4/directive.tscn")
+	
+	scene.circuit = load("res://scene/6/circuit.tscn")
+	scene.chip = load("res://scene/6/chip.tscn")
 
 
 func init_vec():
@@ -190,6 +207,9 @@ func init_vec():
 	vec.size.directive = Vector2(vec.size.specialization)# * 1.25
 	vec.size.clash = Vector2(vec.size.module)
 	vec.size.target = Vector2(vec.size.module)
+	vec.size.circuit = Vector2(vec.size.module)
+	vec.size.chip = Vector2(vec.size.module)
+	
 	
 	vec.size.bar = Vector2(num.module.a / 2, num.module.a * num.framework.n)
 	

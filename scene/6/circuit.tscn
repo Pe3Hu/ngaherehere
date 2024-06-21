@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://cq5tjf8jsmt7v"]
+
+[ext_resource type="Script" path="res://scene/6/circuit.gd" id="1_dw6ik"]
+[ext_resource type="PackedScene" uid="uid://c5wji4w3744nj" path="res://scene/0/token.tscn" id="2_yx0qn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7paps"]
+
+[node name="Circuit" type="MarginContainer"]
+custom_minimum_size = Vector2(5, 5)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_dw6ik")
+
+[node name="BG" type="Panel" parent="."]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7paps")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Chips" type="GridContainer" parent="HBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 3
+
+[node name="VBox" type="VBoxContainer" parent="HBox"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Isolation" parent="HBox/VBox" instance=ExtResource("2_yx0qn")]
+layout_mode = 2
+
+[node name="Consumption" parent="HBox/VBox" instance=ExtResource("2_yx0qn")]
+layout_mode = 2
+
+[node name="Specializations" type="GridContainer" parent="HBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 2
+
+[node name="Lethality" parent="HBox/Specializations" instance=ExtResource("2_yx0qn")]
+layout_mode = 2
+
+[node name="Sensory" parent="HBox/Specializations" instance=ExtResource("2_yx0qn")]
+layout_mode = 2
+
+[node name="Durability" parent="HBox/Specializations" instance=ExtResource("2_yx0qn")]
+layout_mode = 2
+
+[node name="Mobility" parent="HBox/Specializations" instance=ExtResource("2_yx0qn")]
+layout_mode = 2

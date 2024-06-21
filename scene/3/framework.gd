@@ -2,6 +2,7 @@ extends MarginContainer
 
 
 #region var
+@onready var circuits = $HBox/Circuits
 @onready var modules = $HBox/Modules
 @onready var energy = $HBox/Energy
 
@@ -23,7 +24,7 @@ func set_attributes(input_: Dictionary) -> void:
 
 
 func init_basic_setting() -> void:
-	totem = Global.dict.totem.title.keys()[0]#.pick_random()
+	totem = Global.dict.framework.title.keys()[0]#.pick_random()
 	core = god.core
 	core.framework = self
 	
@@ -41,7 +42,7 @@ func init_modules() -> void:
 			add_module(grid)
 	
 	update_module_neighbors()
-	update_module_types()
+	init_circuits()
 	init_axes()
 
 
@@ -85,46 +86,29 @@ func update_module_neighbors() -> void:
 					neighbor.directions[-direction] = module
 
 
-func update_module_types() -> void:
-	var description = Global.dict.totem.title[totem]
-	var options = {}
-	var types = []
-	var orientations = {}
-	orientations["head"] = ["corner", "center", "axis"]
-	orientations["limb"] = ["center", "corner", "axis"]
-	orientations["torso"] = ["axis", "center", "corner"]
+func init_circuits() -> void:
+	var description = Global.dict.framework.title[totem]
 	
-	for module in modules.get_children():
-		if !options.has(module.orientation):
-			options[module.orientation] = []
+	for order in description.circuits:
+		var type = description.gears[order]
+		var indexs = description.circuits[order]
 		
-		options[module.orientation].append(module)
+		add_circuit(type, indexs)
+		
+		for index in indexs:
+			var module = modules.get_child(index)
+			module.set_type(type)
+
+
+func add_circuit(type_: String, indexs_: Array) -> void:
+	var input = {}
+	input.proprietor = self
+	input.type = type_
+	input.indexs = indexs_
 	
-	options.erase("core")
-	
-	for type in description:
-		var limit = description[type].count * description[type].weight
-		
-		for _i in limit:
-			types.append(type)
-	
-	types.shuffle()
-	
-	while !types.is_empty():
-		var type = types.pop_front()
-		var index = 0
-		var orientation = orientations[type][index]
-		
-		while !options.has(orientation):
-			index += 1
-			orientation = orientations[type][index]
-		
-		var option = options[orientation].pick_random()
-		option.set_type(type)
-		options[orientation].erase(option)
-		
-		if options[orientation].is_empty():
-			options.erase(orientation)
+	var circuit = Global.scene.circuit.instantiate()
+	circuits.add_child(circuit)
+	circuit.set_attributes(input)
 
 
 func init_axes() -> void:
@@ -140,7 +124,7 @@ func init_axes() -> void:
 			axes[type].append(module)
 
 
-func  init_indicator() -> void:
+func init_indicator() -> void:
 	var input = {}
 	input.framework = self
 	input.type = "energy"
